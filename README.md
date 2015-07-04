@@ -19,12 +19,12 @@
 	* c. [10 wire ribbon cable](https://www.sparkfun.com/products/10647)
 	* d. [male headers](https://www.sparkfun.com/products/116)
 	* e. [heat shrink](https://www.sparkfun.com/search/products?term=heat+shrink)
-7. *Assemble the cable* - Solder the male connector to the PCB.  Then crimp the female ribbon wire onto the female connector.  Then break off a piece of the male headers that is 6 pins wide.  Cut off about 8 inches of ribbon cable then very carefully figure out which pins on the connector line up with the pin-out on the FTDI Friend.  Remember that TX0->FTDI-RX and RX0->FTDI-TX.  Then directly connect VCC and GND on the PCB to their corresponding pins on the FTDI friend.  The remaining six wires in the connector can be cut short and left disconnected from the male header strip.  Once everything is soldered use some heat shrink to protect and strengthen the connection to the headers stip.  Some photos of my cable are included below:
-
+7. *Assemble the cable* - Solder the male connector to the PCB.  Then crimp the female ribbon wire onto the female connector.  Then break off a piece of the male headers that is 6 pins wide.  Cut off about 8 inches of ribbon cable then very carefully figure out which pins on the connector line up with the pin-out on the FTDI Friend.  Remember that TX0->FTDI-RX and RX0->FTDI-TX.  Then directly connect VCC and GND on the PCB to their corresponding pins on the FTDI friend.  The remaining six wires in the connector can be cut short and left disconnected from the male header strip.  Once everything is soldered use some heat shrink to protect and strengthen the connection to the headers stip.  Some photos of my cable are included below this set of instructions.
+8. The FTDI Friend will also require a micro-USB cable to plug into the mac.
+9. Once everything is soldered up, connected and reassembled, power the router up with the cable plugged in.  The FTDI will make the serial terminal from the router appear in the `/dev/` directory as something like `tty.usbserial-XXXXX`.  Use the `screen` utility to monitor the terminal.  From the book we know that the baud rate for the WRT54GL console is 115200 so this command will give access to the console, `screen <tty.usbserial-XXXX> 115200`.  Of course you will have to put the right file handle in.  I've written a script, `/bin/wrt_console.sh` that will search the `/dev/` folder and open the console.
+10. Finally, once you can log into the console go through the steps above to re-install OpenWrt or the OEM firmware.
 ![pin-out](images/wrt54gl_v11_serialport_.jpg)
 ![connector](images/connector.jpg)
 ![cable](images/cable.jpg)
 ![finished](images/finished.jpg)
 
-8. The FTDI Friend will also require a micro-USB cable to plug into the mac.
-9. Once everything is soldered up, connected and reassembled, power the router up with the cable plugged in.  The FTDI will make the serial terminal from the router appear in the `/dev/` directory as something like `tty.usbserial-XXXXX`.  Use the `screen` utility to monitor the terminal.  From the book we know that the baud rate for the WRT54GL console is 115200 so this command will give access to the console, `screen <tty.usbserial-XXXX> 115200`.  Of course you will have to put the right file handle in.  I've written a script, `/bin/wrt_console.sh` that will search the `/dev/` folder and open the console.
