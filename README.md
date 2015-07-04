@@ -14,9 +14,9 @@
 4. Using the book to understand the pin-out of JP2 on the PCB, I used an Adafruit [FTDI Friend](https://www.adafruit.com/products/284) to convert the serial signal to USB as follows: 
 5. *Voltage mod* - The WRT54GL operates with 3.3V on the PCB, not 5V which is the default VCC Out on the FTDI Friend.  So you will need to cut the 5V trace and solder across the 3.3V jumper.
 6. *Connector bill of materials* - Next we need to build the cable to plug into the FTDI Friend.  I get most of my hobby level stuff from [Sparkfun](sparkfun.com):
-a. [2x5 pin male connector](https://www.sparkfun.com/products/8506)
-b. [2x5 pin female crimp connector](https://www.sparkfun.com/products/10650)
-c. [10 wire ribbon cable](https://www.sparkfun.com/products/10647)
-d. [male headers](https://www.sparkfun.com/products/116)
-e. [heat shrink](https://www.sparkfun.com/search/products?term=heat+shrink)
+> a. [2x5 pin male connector](https://www.sparkfun.com/products/8506)
+> b. [2x5 pin female crimp connector](https://www.sparkfun.com/products/10650)
+> c. [10 wire ribbon cable](https://www.sparkfun.com/products/10647)
+> d. [male headers](https://www.sparkfun.com/products/116)
+> e. [heat shrink](https://www.sparkfun.com/search/products?term=heat+shrink)
 7. *Assemble the cable* - 
