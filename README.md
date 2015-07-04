@@ -25,3 +25,6 @@ GND, VCC, TX, and RX.  The remaining six wires in the connector can be cut short
 ![connector](images/connector.jpg)
 ![cable](images/cable.jpg)
 ![finished](images/finished.jpg)
+
+8. The FTDI Friend will also require a micro-USB cable to plug into the mac.
+9. Once everything is soldered up, connected and reassembled, power the router up with the cable plugged in.  The FTDI will make the serial terminal from the router appear in the `/dev/` directory as something like `tty.usbserial-XXXXX`.  Use the `screen` utility to monitor the terminal.  From the book we know that the baud rate for the WRT54GL console is 115200 so this command will give access to the console, `screen <tty.usbserial-XXXX> 115200`.  Of course you will have to put the right file handle in.  I've written a script, `/bin/wrt_console.sh` that will search the `/dev/` folder and open the console.
