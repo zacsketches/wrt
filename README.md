@@ -19,4 +19,6 @@
 	* c. [10 wire ribbon cable](https://www.sparkfun.com/products/10647)
 	* d. [male headers](https://www.sparkfun.com/products/116)
 	* e. [heat shrink](https://www.sparkfun.com/search/products?term=heat+shrink)
-7. *Assemble the cable* - 
+7. *Assemble the cable* - Solder the male connector to the PCB.  Then crimp the female ribbon wire onto the female connector.  Then break off a piece of the male headers that is 6 pins wide.  Cut off about 8 inches of ribbon cable then very carefully figure out which pins on the connector line up with the pin-out on the FTDI Friend.  You will need to make sure that these pins all line up
+GND, VCC, TX, and RX.  The remaining six wires in the connector can be cut short and left disconnected from the male headers strip.  Once everything is soldered use some heat shrink to protect and strengthen the connection to the headers stip.  Some photos of my cable are included below:
+![connector](images/connector.jpg)
