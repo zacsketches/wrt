@@ -12,11 +12,11 @@
 2. So without the ability to communicate with my new router via any available interface I went to bed pissed off and woke up early to ponder the problem over a fresh cup of coffee.  My solution was to find a way to connect to the serial console provided on the PCB inside the router so I could directly control the linux processor.
 3. There is a good discussion in chapter 7 of the book on building a serial cable to get access to the console via JP2 on the PCB.  The book version requires a level shifting IC to convert the signal level on the board to RS-232 power levels.  Then it connects this to an RS-232 serial connector.  I certainly don't have an RS-232 port on my Mac-Mini or my Macbook Air, so I need to use USB.
 4. Using the book to understand the pin-out of JP2 on the PCB, I used an Adafruit [FTDI Friend](https://www.adafruit.com/products/284) to convert the serial signal to USB as follows: 
-    a. *Voltage mod* - The WRT54GL operates with 3.3V on the PCB, not 5V which is the default VCC Out on the FTDI Friend.  So you will need to cut the 5V trace and solder across the 3.3V jumper.
-    b. *Connector bill of materials* - Next we need to build the cable to plug into the FTDI Friend.  I get most of my hobby level stuff from [Sparkfun](sparkfun.com):
-        1. [2x5 pin male connector](https://www.sparkfun.com/products/8506)
-        2. [2x5 pin female crimp connector](https://www.sparkfun.com/products/10650)
-3. [10 wire ribbon cable](https://www.sparkfun.com/products/10647)
-4. [male headers](https://www.sparkfun.com/products/116)
-5. [heat shrink](https://www.sparkfun.com/search/products?term=heat+shrink)
-c. *Assemble the cable* - 
+5. *Voltage mod* - The WRT54GL operates with 3.3V on the PCB, not 5V which is the default VCC Out on the FTDI Friend.  So you will need to cut the 5V trace and solder across the 3.3V jumper.
+6. *Connector bill of materials* - Next we need to build the cable to plug into the FTDI Friend.  I get most of my hobby level stuff from [Sparkfun](sparkfun.com):
+a. [2x5 pin male connector](https://www.sparkfun.com/products/8506)
+b. [2x5 pin female crimp connector](https://www.sparkfun.com/products/10650)
+c. [10 wire ribbon cable](https://www.sparkfun.com/products/10647)
+d. [male headers](https://www.sparkfun.com/products/116)
+e. [heat shrink](https://www.sparkfun.com/search/products?term=heat+shrink)
+7. *Assemble the cable* - 
