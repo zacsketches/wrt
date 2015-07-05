@@ -19,11 +19,7 @@
 	* c. The work thus far is a convenience because you can log in without being asked to provide your password; **HOWEVER**, password authentication is still turned on.  So before exposing this router to the Internet, password authentication should be **TURNED OFF**.  To do this follow the instructions [here](http://wiki.openwrt.org/oldwiki/dropbearpublickeyauthenticationhowto), but modifying the `/etc/config/dropbear` file to say `option PasswordAuth 'off'`.
 	* d. After modifying the dropbear configuration restart the service using the config scripts in `/etc/init.d/` like this `/etc/init.d/dropbear restart`.  Then try to ssh in from a fictitious user like this, `ssh bob@192.168.1.1`.  You **SHOULD** get the reply back `Permission denied (publickey)`, and your command to `ssh root@192.168.1.1` should log in immediately without any password request.
 	* e. Don't forget that you can use `uci` the (universal configuration interface) to see the status of anything in `/etc/init.d` by typing `uci show <foo>`.
-6. **Set up an ssh config file** - Following the advice on page 113, an ssh config file makes it easier to ssh into various computers.  Create the file `touch ~/.ssh/config`.  Then edit this file as follows:
-> `host wrt`
-> `   hostname 192.168.1.1`
-> `   user root`
-Now the command `ssh wrt` will log into the correct IP with the right user.
+6. **Set up an ssh config file** - Following the advice on page 113, an ssh config file makes it easier to ssh into various computers.  Create the file `touch ~/.ssh/config`.  Then edit the `hosts` along the lines of the example hosts file in this repo.  When complete the command `ssh wrt` will log into the correct IP with the right user.
 7. **Reverting back to original firmware** - For this one the obvious stuff like using the OpenWrt web interface works.  But let's assume things have gone pretty horribly wrong (and they will at some point).  So assuming you have managed to lock yourself out of the router and options for the web interface or TFTP won't work, here is the way I had to re-install the original firmware once I got a direct connection to the hardware console as described in the next section.
 	* a. Download the Linksys firmware [here](http://www.linksys.com/us/support-article?articleNum=148652)
 	* b. Convert from a `<foo>.bin` file to a `<foo>.trx` file using the `dd` command like this `dd if=<foo>.bin of=<foo>.trx bs=32 skip=1`.  This code strips off the 32 byte header.
