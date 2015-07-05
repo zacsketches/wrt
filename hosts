@@ -1,0 +1,4 @@
+host wrt
+	hostname	192.168.1.1
+	user		root
+
