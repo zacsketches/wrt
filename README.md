@@ -24,11 +24,11 @@
 	* b. Convert from a `<foo>.bin` file to a `<foo>.trx` file using the `dd` command like this `dd if=<foo>.bin of=<foo>.trx bs=32 skip=1`.  This code strips off the 32 byte header.
 	* c. Use `scp` to move the new .trx file into the `/tmp/` directory of the router.  Then use sysupgrade as described [here](http://wiki.openwrt.org/doc/howto/generic.sysupgrade), but note that the example on the wiki is still using `.bin` files.  These have been deprecated for sysupgrade so you must convert the source to a .trx file.
 7. **Uploading firmware via TFTP** - Trivial File Transfer Protocol (TFTP) is the default way of uploading firmware to the router.  This describes my process for getting TFTP working.  Although the book and web site were helpful there were a few tricks that I had to figure out on my own.
-	a. The router must be `ping`able.  This should seem obvious but in the midst of troubleshooting it is easy to forget step one - `ping 192.168.1.1`
-	b. I highly recommend adding the serial cable shown below while getting used to the WRT54 for first time because you can actually watch to boot sequence and see when it delays to listen for TFTP.
-	c. TFTP can upload `<foo>.bin` files as opposed to `.trx` files necessary for `sysupgrade`, so the transformation from paragraph 6 is unnecessary.
-	d. Before uploading any software check the md5 checksum.  Easiest method on Mac is to use my script `check_md5.sh <firmware>.bin md5sums`.
-	e. Pending a satisfactory verification, and if your router IP is still 192.168.1.1 the easiest thing to do in order to upload software via TFTP is to use my `wrt_tftp.sh` script.  Just run the script on the Mac host, `wrt_tftp.sh <firmware>.bin` then `reboot` the router from the console.  The timeout set on the tftp script should allow the two devices to link up. 
+	* The router must be `ping`able.  This should seem obvious but in the midst of troubleshooting it is easy to forget step one - `ping 192.168.1.1`
+	* I highly recommend adding the serial cable shown below while getting used to the WRT54 for first time because you can actually watch to boot sequence and see when it delays to listen for TFTP.
+	* TFTP can upload `<foo>.bin` files as opposed to `.trx` files necessary for `sysupgrade`, so the transformation from paragraph 6 is unnecessary.
+	* Before uploading any software check the md5 checksum.  Easiest method on Mac is to use my script `check_md5.sh <firmware>.bin md5sums`.
+	* Pending a satisfactory verification, and if your router IP is still 192.168.1.1 the easiest thing to do in order to upload software via TFTP is to use my `wrt_tftp.sh` script.  Just run the script on the Mac host, `wrt_tftp.sh <firmware>.bin` then `reboot` the router from the console.  The timeout set on the tftp script should allow the two devices to link up. 
  
 ##Brick on Day 1
 1. THE TRUTH...I screwed up my router the first day I played around with it. I got off the reservation and started messing around with the way the router was configured to my home network...at which point I managed to shut down the wireless and DHCP server and erased it's self-assigned IP. So I could not communicate with the router anymore. **THUS...I BRICKED IT ON THE FIRST DAY!**
