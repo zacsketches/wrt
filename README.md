@@ -20,18 +20,15 @@
 	* d. After modifying the dropbear configuration restart the service using the config scripts in `/etc/init.d/` like this `/etc/init.d/dropbear restart`.  Then try to ssh in from a fictitious user like this, `ssh bob@192.168.1.1`.  You **SHOULD** get the reply back `Permission denied (publickey)`, and your command to `ssh root@192.168.1.1` should log in immediately without any password request.
 	* e. Don't forget that you can use `uci` the (universal configuration interface) to see the status of anything in `/etc/init.d` by typing `uci show <foo>`.
 6. **Set up an ssh config file** - Following the advice on page 113, an ssh config file makes it easier to ssh into various computers.  Create the file `touch ~/.ssh/config`.  Then edit this file as follows:
-```
-host wrt
-	hostname 192.168.1.1
-	user root
-```
+> `host wrt`
+> `   hostname 192.168.1.1`
+> `   user root`
 Now the command `ssh wrt` will log into the correct IP with the right user.
-
-6. **Reverting back to original firmware** - For this one the obvious stuff like using the OpenWrt web interface works.  But let's assume things have gone pretty horribly wrong (and they will at some point).  So assuming you have managed to lock yourself out of the router and options for the web interface or TFTP won't work, here is the way I had to re-install the original firmware once I got a direct connection to the hardware console as described in the next section.
+7. **Reverting back to original firmware** - For this one the obvious stuff like using the OpenWrt web interface works.  But let's assume things have gone pretty horribly wrong (and they will at some point).  So assuming you have managed to lock yourself out of the router and options for the web interface or TFTP won't work, here is the way I had to re-install the original firmware once I got a direct connection to the hardware console as described in the next section.
 	* a. Download the Linksys firmware [here](http://www.linksys.com/us/support-article?articleNum=148652)
 	* b. Convert from a `<foo>.bin` file to a `<foo>.trx` file using the `dd` command like this `dd if=<foo>.bin of=<foo>.trx bs=32 skip=1`.  This code strips off the 32 byte header.
 	* c. Use `scp` to move the new .trx file into the `/tmp/` directory of the router.  Then use sysupgrade as described [here](http://wiki.openwrt.org/doc/howto/generic.sysupgrade), but note that the example on the wiki is still using `.bin` files.  These have been deprecated for sysupgrade so you must convert the source to a .trx file.
-7. **Uploading firmware via TFTP** - Trivial File Transfer Protocol (TFTP) is the default way of uploading firmware to the router.  This describes my process for getting TFTP working.  Although the book and web site were helpful there were a few tricks that I had to figure out on my own.
+8. **Uploading firmware via TFTP** - Trivial File Transfer Protocol (TFTP) is the default way of uploading firmware to the router.  This describes my process for getting TFTP working.  Although the book and web site were helpful there were a few tricks that I had to figure out on my own.
 	* The router must be `ping`able.  This should seem obvious but in the midst of troubleshooting it is easy to forget step one - `ping 192.168.1.1`
 	* I highly recommend adding the serial cable shown below while getting used to the WRT54 for first time because you can actually watch to boot sequence and see when it delays to listen for TFTP.
 	* TFTP can upload `<foo>.bin` files as opposed to `.trx` files necessary for `sysupgrade`, so the transformation from paragraph 6 is unnecessary.
