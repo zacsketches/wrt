@@ -26,6 +26,7 @@ host wrt
 	user root
 ```
 Now the command `ssh wrt` will log into the correct IP with the right user.
+
 6. **Reverting back to original firmware** - For this one the obvious stuff like using the OpenWrt web interface works.  But let's assume things have gone pretty horribly wrong (and they will at some point).  So assuming you have managed to lock yourself out of the router and options for the web interface or TFTP won't work, here is the way I had to re-install the original firmware once I got a direct connection to the hardware console as described in the next section.
 	* a. Download the Linksys firmware [here](http://www.linksys.com/us/support-article?articleNum=148652)
 	* b. Convert from a `<foo>.bin` file to a `<foo>.trx` file using the `dd` command like this `dd if=<foo>.bin of=<foo>.trx bs=32 skip=1`.  This code strips off the 32 byte header.
