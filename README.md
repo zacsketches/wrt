@@ -1,6 +1,10 @@
 #WRT54GL
 ####July 2015 - I've been playing with a new [WRT54GL router](http://www.amazon.com/Linksys-WRT54GL-Wireless-G-Broadband-Router/dp/B000BTL0OA/ref=sr_1_1?s=electronics&ie=UTF8&qid=1436047039&sr=1-1&keywords=wrt54gl) for about a month and wanted to go back and make a list of the configuration lessons learned I've tracked down.  My primary references are this [book](http://www.amazon.com/Linksys-WRT54G-Ultimate-Hacking-Asadoorian/dp/1597491667/ref=sr_1_1?s=books&ie=UTF8&qid=1436045407&sr=1-1&keywords=wrt54g), and the OpenWrt [website](openwrt.org).  My examples are applicable with Mac OS X on the development machine.
 
+##A few comments up front
+1. The book is based on an older set of firmware (White Russian 0.8) that used a few deprecated techniques.  So much of the book is good for getting a general sense of how the router works, but not directly applicable to copy example source code.
+2. The book jumps around from topic to topic a lot in the first 150 pages.  So I think the section below on the the basics is a much more linear progression through getting a router up and running.
+
 ##The basics
 1. **Logging in** - The first thing I had to do was configure my computer to log into  the Linksys router.  The default IP on the router is 192.168.1.1. so I had to give my computer a manual IP on the same subnet. I chose 192.168.1.54.  In the systems preferences panel I selected to use "DHCP with manual IP".  With that completed just plug into any LAN port on the router and load the router address in a browser to get to the web interface.  The browser will prompt for username and password.  Both are set to the default value, `admin`.
 2. **Wireless while connected directly** - Next I wanted to be able to browse the web while I'm working on this so I enabled my wifi card on my host Mac-Mini to link into the home wireless network.  The problem came up that whenever I was connected to both the WRT via ethernet and the wifi network I couldn't get web traffic to route to the wifi.  So again, open up network preferences and in the bottom left hit the little gear.  In there you can "Set Service Order.."  By dragging the wifi interface higher in the list it pushed traffic toward that interface first.
@@ -8,6 +12,10 @@
 	* a. From [this page](http://wiki.openwrt.org/toh/linksys/wrt54g) on the OpenWrt website, it looks like a stable version to use with this hardware is 8.09.2.  So browse to the [downloads page](http://downloads.openwrt.org/kamikaze/8.09.2/brcm-2.4/) and click on it, or get is directly from your Mac host like this, `wget http://downloads.openwrt.org/kamikaze/8.09.2/brcm-2.4/openwrt-wrt54g-squashfs.bin`. 
 	* b. Also download the `md5sums` file.  Then follow the the instructions on page 56 to verify the integrity of the downloaded file.  Simpler still use the `check_md5.sh` script in this repository to run the check.
 	* c. Once the upgrade firmware is verified follow the upgrade instructions on page 57 at the Linksys *Administration* tab of the web interface.
+4. **Change the root password** - As described on page 72 you can change the root password via the web interface or the command line.  Of course, I prefer the command line.  From the Mac host `telnet 192.168.1.1`.  Then run the `passwd` command.  After updating the password `exit` out of the telnet session, and attempt to telnet back in.  It **SHOULD** deny this connection.  So ssh is the only remote login available now.
+5. **Set up PKI based ssh** - Password based login is weak protection even with SSH because it is vulnerable to brute force attack.  Set up PKI protection for the ssh root login as described on page 127, which I followed with the following modifications to get it working.
+	* a. In order to use `scp` to move my public key over to the router I had to use use this command `scp ~/.ssh/id_dsa.pub root@192.168.1.1:/tmp/` because I have not set up the hosts file yet to call it by name.
+	* b. Similarly, once the keys were in place I had to ssh like this `ssh root@192.168.1.1` for the same reason that my hosts file on the Mac is not set up.
 4. **Reverting back to original firmware** - 
 
 ##Brick on Day 1
