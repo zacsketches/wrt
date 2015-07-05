@@ -16,7 +16,10 @@
 5. **Set up PKI based ssh** - Password based login is weak protection even with SSH because it is vulnerable to brute force attack.  Set up PKI protection for the ssh root login as described on page 127, which I followed with the following modifications to get it working.
 	* a. In order to use `scp` to move my public key over to the router I had to use use this command `scp ~/.ssh/id_dsa.pub root@192.168.1.1:/tmp/` because I have not set up the hosts file yet to call it by name.
 	* b. Similarly, once the keys were in place I had to ssh like this `ssh root@192.168.1.1` for the same reason that my hosts file on the Mac is not set up.
-4. **Reverting back to original firmware** - 
+4. **Reverting back to original firmware** - For this one the obvious stuff like using the OpenWrt web interface works.  But let's assume things have gone pretty horribly wrong (and they will).  So assuming you have managed to lock yourself out of the router and options for the web interface or TFTP won't work, here is the way I had to re-install the original firmware once I got a direct connection to the hardware console as described in the next section.
+	* a. Download the Linksys firmware [here](http://www.linksys.com/us/support-article?articleNum=148652)
+	* b. Convert from a `<foo>.bin` file to a `<foo>.trx` file using the `dd` command like this `dd if=<foo>.bin of=<foo>.trx bs=32 skip=1`.  This code strips off the 32 byte header.
+	* c. Use `scp` to move the new .trx file into the `/tmp/` directory of the router.  Then use sysupgrade as described [here](http://wiki.openwrt.org/doc/howto/generic.sysupgrade), but note that the example on the wiki is still using `.bin` files.  These have been deprecated for sysupgrade so you must convert the source to a .trx file.
 
 ##Brick on Day 1
 1. THE TRUTH...I screwed up my router the first day I played around with it. I got off the reservation and started messing around with the way the router was configured to my home network...at which point I managed to shut down the wireless and DHCP server and erased it's self-assigned IP. So I could not communicate with the router anymore. **THUS...I BRICKED IT ON THE FIRST DAY!**
