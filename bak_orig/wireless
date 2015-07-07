@@ -1,0 +1,13 @@
+
+config 'wifi-device' 'wl0'
+	option 'type' 'broadcom'
+	option 'channel' '5'
+	option 'disabled' '1'
+
+config 'wifi-iface'
+	option 'device' 'wl0'
+	option 'network' 'lan'
+	option 'mode' 'ap'
+	option 'encryption' 'none'
+	option 'ssid' 'ZacNet'
+
